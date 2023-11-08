@@ -61,7 +61,7 @@
 <body class="text-center">
     <div class="container">
         <h1 class="fixed-top">BadJoke.gov</h1>
-        <button id="getJokeButton" class="btn btn-primary fixed-top">Get a Joke</button>
+        <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
         <p id="jokeText" class="lead"></p>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
@@ -86,4 +86,11 @@
             .then(data => {
                 jokeText.textContent = data.joke;
             })
-            .catch
+            .catch(error => {
+                jokeText.textContent = "An error occurred while fetching the joke.";
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+</html>
