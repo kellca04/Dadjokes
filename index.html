@@ -40,6 +40,9 @@
             font-size: 1.5rem;
             text-align: center;
             margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00ff00;
+            padding: 15px;
         }
 
         h1 {
@@ -71,7 +74,7 @@
             funnySound.play();
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application.json"
                 }
             })
             .then(response => response.json())
