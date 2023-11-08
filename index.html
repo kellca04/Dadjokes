@@ -41,10 +41,25 @@
             border: 2px solid #ff0000;
         }
 
+        .joke-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .star-checkbox {
+            display: none;
+        }
+
+        .star-label {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
         #jokeText {
             font-size: 1.5rem;
             text-align: center;
-            margin-top: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             color: #00ff00;
             padding: 15px;
@@ -74,6 +89,7 @@
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
+        let savedJokes = [];
 
         getJokeButton.addEventListener("click", () => {
             funnySound.play();
@@ -84,13 +100,41 @@
             })
             .then(response => response.json())
             .then(data => {
-                jokeText.textContent = data.joke;
+                const joke = data.joke;
+                const jokeContainer = document.createElement("div");
+                jokeContainer.classList.add("joke-container");
+
+                const starCheckbox = document.createElement("input");
+                starCheckbox.type = "checkbox";
+                starCheckbox.classList.add("star-checkbox");
+
+                const starLabel = document.createElement("label");
+                starLabel.classList.add("star-label");
+                starLabel.innerHTML = "&#9734"; // Star character
+
+                starCheckbox.addEventListener("change", () => {
+                    if (starCheckbox.checked) {
+                        savedJokes.push(joke);
+                        localStorage.setItem("savedJokes", JSON.stringify(savedJokes));
+                    }
+                });
+
+                jokeContainer.appendChild(starCheckbox);
+                jokeContainer.appendChild(starLabel);
+                jokeContainer.innerHTML += joke;
+
+                jokeText.appendChild(jokeContainer);
             })
             .catch(error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
                 console.error(error);
             });
         });
+
+        // Load saved jokes from local storage
+        if (localStorage.getItem("savedJokes")) {
+            savedJokes = JSON.parse(localStorage.getItem("savedJokes"));
+        }
     </script>
 </body>
 </html>
