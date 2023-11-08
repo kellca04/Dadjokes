@@ -41,30 +41,6 @@
             border: 2px solid #ff0000;
         }
 
-        .joke-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .star-checkbox {
-            display: none;
-        }
-
-        .star-label {
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        .star-label::before {
-            content: "\2606"; /* Empty star character */
-        }
-
-        .star-checkbox:checked + .star-label::before {
-            content: "\2605"; /* Filled star character */
-        }
-
         #jokeText {
             font-size: 1.5rem;
             text-align: center;
@@ -85,7 +61,7 @@
     <div class="container">
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
-        <div id="jokeText" class="lead"></div>
+        <p id="jokeText" class="lead"></p>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
 
@@ -97,7 +73,6 @@
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
-        let savedJokes = [];
 
         getJokeButton.addEventListener("click", () => {
             funnySound.play();
@@ -109,39 +84,13 @@
             .then(response => response.json())
             .then(data => {
                 const joke = data.joke;
-                const jokeContainer = document.createElement("div");
-                jokeContainer.classList.add("joke-container");
-
-                const starCheckbox = document.createElement("input");
-                starCheckbox.type = "checkbox";
-                starCheckbox.classList.add("star-checkbox");
-
-                const starLabel = document.createElement("label");
-                starLabel.classList.add("star-label");
-
-                starCheckbox.addEventListener("change", () => {
-                    if (starCheckbox.checked) {
-                        savedJokes.push(joke);
-                        localStorage.setItem("savedJokes", JSON.stringify(savedJokes));
-                    }
-                });
-
-                jokeContainer.appendChild(starCheckbox);
-                jokeContainer.appendChild(starLabel);
-                jokeContainer.innerHTML += joke;
-
-                jokeText.appendChild(jokeContainer);
+                jokeText.textContent = joke;
             })
             .catch(error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
                 console.error(error);
             });
         });
-
-        // Load saved jokes from local storage
-        if (localStorage.getItem("savedJokes")) {
-            savedJokes = JSON.parse(localStorage.getItem("savedJokes"));
-        }
     </script>
 </body>
 </html>
