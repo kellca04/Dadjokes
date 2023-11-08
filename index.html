@@ -62,7 +62,7 @@
         getJokeButton.addEventListener("click", () => {
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
-                    "Accept": "application.json"
+                    "Accept": "application/json"
                 }
             })
             .then(response => response.json())
