@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BadJoke.gov</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="text-center">
+    <div class="container mt-5">
+        <h1 class="mb-4">BadJoke.gov</h1>
+        <button id="getJokeButton" class="btn btn-primary">Click me!</button>
+        <p id="jokeText" class="mt-4 lead"></p>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const getJokeButton = document.getElementById("getJokeButton");
+        const jokeText = document.getElementById("jokeText");
+
+        getJokeButton.addEventListener("click", () => {
+ 
+            fetch("https://icanhazdadjoke.com/", {
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                jokeText.textContent = data.joke;
+            })
+            .catch(error => {
+                jokeText.textContent = "An error occurred while fetching the joke.";
+                console.error(error);
+            });
+        });
+    </script>
+</body>
+</html>
