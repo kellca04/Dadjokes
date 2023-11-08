@@ -4,17 +4,11 @@
     <title>BadJoke.gov</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <style>
         body {
-            background: repeating-linear-gradient(45deg, #ff0000, #00ff00 10px, #0000ff 10px, #ff00ff 20px); 
+            background: url('https://t4.ftcdn.net/jpg/03/29/57/63/360_F_329576340_zBRuVjvHWe9zgh2b2C5fwQNITE8oGsv5.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #ff00ff;
-            animation: colorChange 2s infinite alternate;
-        }
-
-        @keyframes colorChange {
-            0% { color: #ff00ff; }
-            100% { color: #00ff00; }
         }
 
         .container {
@@ -22,19 +16,20 @@
         }
 
         .btn-primary {
-            background-color: #ff00ff; 
-            border: 2px solid #00ff00; 
-            color: #00ff00;
+            background-color: #ff00ff;
+            border: 2px solid #00ff00;
+            color: #00ff00; 
         }
 
         .btn-primary:hover {
-            background-color: #00ff00; 
-            color: #ff00ff;
-            border: 2px solid #ff0000;
+            background-color: #00ff00;
+            color: #ff00ff; 
+            border: 2px solid #ff0000; 
         }
 
         #jokeText {
-            font-family: 'Comic Sans MS', cursive; 
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 2px 2px 4px #000000;
         }
     </style>
 </head>
@@ -50,12 +45,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
     <script>
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
 
         getJokeButton.addEventListener("click", () => {
-        
+  
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
                     "Accept": "application/json"
@@ -63,7 +61,7 @@
             })
             .then(response => response.json())
             .then(data => {
-         
+        
                 jokeText.textContent = data.joke;
             })
             .catch(error => {
