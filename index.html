@@ -48,18 +48,23 @@
         <h1 class="mb-4">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Click me!</button>
         <p id="jokeText" class="mt-4 lead"></p>
+        <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <script>
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
+        const funnySound = document.getElementById("funnySound");
 
         getJokeButton.addEventListener("click", () => {
+            // Play the funny sound
+            funnySound.play();
+
+            // Make a GET request to the dad joke API
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
                     "Accept": "application/json"
