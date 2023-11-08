@@ -21,7 +21,7 @@
         }
 
         .btn-primary {
-            background-color: #ff00ff;
+            background-color: #aa55ff; /* Light purple */
             border: 2px solid #00ff00;
             color: #00ff00;
             padding: 20px 40px;
@@ -32,7 +32,7 @@
 
         .btn-primary:hover {
             background-color: #00ff00;
-            color: #ff00ff;
+            color: #aa55ff; /* Light purple */
             border: 2px solid #ff0000;
         }
 
@@ -74,7 +74,7 @@
             funnySound.play();
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
-                    "Accept": "application.json"
+                    "Accept": "application/json"
                 }
             })
             .then(response => response.json())
