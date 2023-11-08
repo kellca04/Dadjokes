@@ -41,6 +41,10 @@
             border: 2px solid #ff0000;
         }
 
+        .star-checkbox {
+            display: none;
+        }
+
         #jokeText {
             font-size: 1.5rem;
             text-align: center;
@@ -84,13 +88,57 @@
             .then(response => response.json())
             .then(data => {
                 const joke = data.joke;
-                jokeText.textContent = joke;
+                const jokeContainer = document.createElement("div");
+                jokeContainer.classList.add("joke-container");
+
+                const starCheckbox = document.createElement("input");
+                starCheckbox.type = "checkbox";
+                starCheckbox.classList.add("star-checkbox");
+
+                starCheckbox.addEventListener("change", () => {
+                    if (starCheckbox.checked) {
+                        localStorage.setItem("savedJoke", joke);
+                    } else {
+                        localStorage.removeItem("savedJoke");
+                    }
+                });
+
+                jokeContainer.appendChild(starCheckbox);
+                jokeContainer.innerHTML += joke;
+
+                jokeText.textContent = "";
+                jokeText.appendChild(jokeContainer);
             })
             .catch(error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
                 console.error(error);
             });
         });
+
+        // Load saved joke from local storage
+        const savedJoke = localStorage.getItem("savedJoke");
+        if (savedJoke) {
+            const jokeContainer = document.createElement("div");
+            jokeContainer.classList.add("joke-container");
+
+            const starCheckbox = document.createElement("input");
+            starCheckbox.type = "checkbox";
+            starCheckbox.classList.add("star-checkbox");
+            starCheckbox.checked = true;
+
+            starCheckbox.addEventListener("change", () => {
+                if (!starCheckbox.checked) {
+                    localStorage.removeItem("savedJoke");
+                    jokeContainer.style.display = "none";
+                }
+            });
+
+            jokeContainer.appendChild(starCheckbox);
+            jokeContainer.innerHTML += savedJoke;
+
+            jokeText.textContent = "";
+            jokeText.appendChild(jokeContainer);
+        }
     </script>
 </body>
-</html>.
+</html>
