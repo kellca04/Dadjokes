@@ -41,8 +41,13 @@
             border: 2px solid #ff0000;
         }
 
-        .star-checkbox {
-            display: none;
+        .save-button {
+            background-color: #ffaa00;
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         #jokeText {
@@ -65,6 +70,7 @@
     <div class="container">
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
+        <button id="saveJokeButton" class="save-button">Save Joke</button>
         <p id="jokeText" class="lead"></p>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
@@ -75,8 +81,11 @@
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <script>
         const getJokeButton = document.getElementById("getJokeButton");
+        const saveJokeButton = document.getElementById("saveJokeButton");
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
+
+        let currentJoke = null;
 
         getJokeButton.addEventListener("click", () => {
             funnySound.play();
@@ -87,27 +96,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                const joke = data.joke;
-                const jokeContainer = document.createElement("div");
-                jokeContainer.classList.add("joke-container");
-
-                const starCheckbox = document.createElement("input");
-                starCheckbox.type = "checkbox";
-                starCheckbox.classList.add("star-checkbox");
-
-                starCheckbox.addEventListener("change", () => {
-                    if (starCheckbox.checked) {
-                        localStorage.setItem("savedJoke", joke);
-                    } else {
-                        localStorage.removeItem("savedJoke");
-                    }
-                });
-
-                jokeContainer.appendChild(starCheckbox);
-                jokeContainer.innerHTML += joke;
-
-                jokeText.textContent = "";
-                jokeText.appendChild(jokeContainer);
+                currentJoke = data.joke;
+                jokeText.textContent = currentJoke;
             })
             .catch(error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
@@ -115,30 +105,14 @@
             });
         });
 
-        // Load saved joke from local storage
-        const savedJoke = localStorage.getItem("savedJoke");
-        if (savedJoke) {
-            const jokeContainer = document.createElement("div");
-            jokeContainer.classList.add("joke-container");
-
-            const starCheckbox = document.createElement("input");
-            starCheckbox.type = "checkbox";
-            starCheckbox.classList.add("star-checkbox");
-            starCheckbox.checked = true;
-
-            starCheckbox.addEventListener("change", () => {
-                if (!starCheckbox.checked) {
-                    localStorage.removeItem("savedJoke");
-                    jokeContainer.style.display = "none";
-                }
-            });
-
-            jokeContainer.appendChild(starCheckbox);
-            jokeContainer.innerHTML += savedJoke;
-
-            jokeText.textContent = "";
-            jokeText.appendChild(jokeContainer);
-        }
+        saveJokeButton.addEventListener("click", () => {
+            if (currentJoke) {
+                localStorage.setItem("savedJoke", currentJoke);
+                alert("Joke saved to local storage!");
+            } else {
+                alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
+            }
+        });
     </script>
 </body>
 </html>
