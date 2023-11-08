@@ -18,6 +18,8 @@
             background-color: #ff00ff;
             border: 2px solid #00ff00;
             color: #00ff00;
+            padding: 20px 40px;
+            font-size: 2rem;
         }
 
         .btn-primary:hover {
@@ -29,10 +31,11 @@
         #jokeText {
             font-family: 'Press Start 2P', cursive;
             text-shadow: 2px 2px 4px #000000;
+            font-size: 2rem;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 5rem;
             color: #00ff00;
             text-transform: uppercase;
             letter-spacing: 8px;
@@ -49,10 +52,9 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    
     <script>
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
@@ -60,7 +62,7 @@
         getJokeButton.addEventListener("click", () => {
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application.json"
                 }
             })
             .then(response => response.json())
