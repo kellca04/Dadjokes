@@ -68,7 +68,7 @@
 </head>
 <body class="text-center">
     <div class="container">
-        <h1 class="fixed-top">BadJoke.gov</h1>
+        <h1 class "fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
         <button id="saveJokeButton" class="save-button">Save Joke</button>
         <p id="jokeText" class="lead"></p>
@@ -85,8 +85,6 @@
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
 
-        let currentJoke = null;
-
         getJokeButton.addEventListener("click", () => {
             funnySound.play();
             fetch("https://icanhazdadjoke.com/", {
@@ -96,8 +94,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                currentJoke = data.joke;
-                jokeText.textContent = currentJoke;
+                const joke = data.joke;
+                jokeText.textContent = joke;
             })
             .catch(error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
@@ -106,8 +104,11 @@
         });
 
         saveJokeButton.addEventListener("click", () => {
+            const savedJokes = JSON.parse(localStorage.getItem("savedJokes")) || [];
+            const currentJoke = jokeText.textContent;
             if (currentJoke) {
-                localStorage.setItem("savedJoke", currentJoke);
+                savedJokes.push(currentJoke);
+                localStorage.setItem("savedJokes", JSON.stringify(savedJokes));
                 alert("Joke saved to local storage!");
             } else {
                 alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
