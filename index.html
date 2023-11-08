@@ -7,11 +7,17 @@
         body {
             background: url('https://wallpaperaccess.com/full/653166.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #ff00ff;
+            color: #00ff00;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 4px 4px 8px #ff00ff;
         }
 
         .container {
-            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .btn-primary {
@@ -20,6 +26,8 @@
             color: #00ff00;
             padding: 20px 40px;
             font-size: 2rem;
+            transition: all 0.3s;
+            outline: none;
         }
 
         .btn-primary:hover {
@@ -29,26 +37,24 @@
         }
 
         #jokeText {
-            font-family: 'Press Start 2P', cursive;
-            text-shadow: 2px 2px 4px #000000;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20px;
         }
 
         h1 {
-            font-size: 5rem;
-            color: #00ff00;
+            font-size: 3rem;
             text-transform: uppercase;
             letter-spacing: 8px;
-            text-shadow: 4px 4px 8px #ff00ff;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body class="text-center">
     <div class="container">
         <h1 class="mb-4">BadJoke.gov</h1>
-        <button id="getJokeButton" class="btn btn-primary">Click me!</button>
-        <p id="jokeText" class="mt-4 lead"></p>
-        <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
+        <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
+        <p id="jokeText" class="lead"></p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -58,13 +64,8 @@
     <script>
         const getJokeButton = document.getElementById("getJokeButton");
         const jokeText = document.getElementById("jokeText");
-        const funnySound = document.getElementById("funnySound");
 
         getJokeButton.addEventListener("click", () => {
-            // Play the funny sound
-            funnySound.play();
-
-            // Make a GET request to the dad joke API
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
                     "Accept": "application/json"
