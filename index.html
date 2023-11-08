@@ -7,8 +7,14 @@
 
     <style>
         body {
-            background-color: #000; 
+            background: repeating-linear-gradient(45deg, #ff0000, #00ff00 10px, #0000ff 10px, #ff00ff 20px); 
             color: #ff00ff;
+            animation: colorChange 2s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #ff00ff; }
+            100% { color: #00ff00; }
         }
 
         .container {
@@ -16,20 +22,21 @@
         }
 
         .btn-primary {
-            background-color: #00ccff;
-            border: none;
+            background-color: #ff00ff; 
+            border: 2px solid #00ff00; 
+            color: #00ff00;
         }
 
         .btn-primary:hover {
-            background-color: #ff00cc; 
+            background-color: #00ff00; 
+            color: #ff00ff;
+            border: 2px solid #ff0000;
         }
 
         #jokeText {
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Comic Sans MS', cursive; 
         }
     </style>
-
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 </head>
 <body class="text-center">
     <div class="container">
@@ -38,7 +45,7 @@
         <p id="jokeText" class="mt-4 lead"></p>
     </div>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -48,7 +55,7 @@
         const jokeText = document.getElementById("jokeText");
 
         getJokeButton.addEventListener("click", () => {
-
+        
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
                     "Accept": "application/json"
@@ -56,7 +63,7 @@
             })
             .then(response => response.json())
             .then(data => {
-          
+         
                 jokeText.textContent = data.joke;
             })
             .catch(error => {
