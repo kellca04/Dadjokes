@@ -20,10 +20,15 @@
             height: 100vh;
         }
 
+        .fixed-top {
+            position: fixed;
+            top: 20px;
+        }
+
         .btn-primary {
-            background-color: #aa55ff; /* Light purple */
+            background-color: #aa55ff;
             border: 2px solid #00ff00;
-            color: #00ff00;
+            color: #00f0f0;
             padding: 20px 40px;
             font-size: 2rem;
             transition: all 0.3s;
@@ -32,7 +37,7 @@
 
         .btn-primary:hover {
             background-color: #00ff00;
-            color: #aa55ff; /* Light purple */
+            color: #aa55ff;
             border: 2px solid #ff0000;
         }
 
@@ -55,8 +60,8 @@
 </head>
 <body class="text-center">
     <div class="container">
-        <h1 class="mb-4">BadJoke.gov</h1>
-        <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
+        <h1 class="fixed-top">BadJoke.gov</h1>
+        <button id="getJokeButton" class="btn btn-primary fixed-top">Get a Joke</button>
         <p id="jokeText" class="lead"></p>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
@@ -81,11 +86,4 @@
             .then(data => {
                 jokeText.textContent = data.joke;
             })
-            .catch(error => {
-                jokeText.textContent = "An error occurred while fetching the joke.";
-                console.error(error);
-            });
-        });
-    </script>
-</body>
-</html>
+            .catch
