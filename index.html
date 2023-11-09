@@ -56,13 +56,14 @@
             background-color: rgba(0, 0, 0, 0.7);
             color: #00ff00;
             padding: 15px;
+            max-width: 400px;
         }
 
         #savedJokes {
             position: fixed;
             top: 20px;
             right: 20px;
-            max-width: 400px;
+            width: 200px;
             background-color: rgba(0, 0, 0, 0.7);
             color: #00ff00;
             padding: 10px;
@@ -93,14 +94,14 @@
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
         <button id="saveJokeButton" class="save-button">Save Joke</button>
-        <p id="jokeText" class="lead"></p>
+        <div id="jokeText"></div>
+        <div id="savedJokes">
+            <h2>Saved Jokes</h2>
+            <ul>
+                <!-- Saved jokes will be added here dynamically -->
+            </ul>
+        </div>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
-    </div>
-    <div id="savedJokes">
-        <h2>Saved Jokes</h2>
-        <ul>
-            <!-- Saved jokes will be added here dynamically -->
-        </ul>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
