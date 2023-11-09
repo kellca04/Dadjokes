@@ -122,7 +122,7 @@
             </ul>
         </div>
         <div id="volumeControl">
-            <label for="volumeSlider">Volume:</label>
+            <label for="volumeSlider" style="color: #00ff00;">Volume:</label>
             <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
         </div>
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
@@ -177,31 +177,4 @@
             .then(response => response.json())
             .then(data => {
                 const joke = data.joke;
-                jokeText.textContent = joke;
-            })
-            .catch(error => {
-                jokeText.textContent = "An error occurred while fetching the joke.";
-                console.error(error);
-            });
-        });
-
-        saveJokeButton.addEventListener("click", () => {
-            const currentJoke = jokeText.textContent;
-            if (currentJoke) {
-                const key = "savedJoke-" + new Date().getTime();
-                const listItem = document.createElement("li");
-                listItem.textContent = currentJoke;
-                listItem.setAttribute("data-key", key);
-                listItem.addEventListener("click", removeSavedJoke);
-                savedJokesList.appendChild(listItem);
-                localStorage.setItem(key, currentJoke);
-            }
-        });
-
-        // Update audio volume when the slider is moved
-        volumeSlider.addEventListener("input", () => {
-            funnySound.volume = volumeSlider.value;
-        });
-    </script>
-</body>
-</html>
+               
