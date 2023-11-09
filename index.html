@@ -64,7 +64,7 @@
             top: 20px;
             right: 20px;
             width: 400px; /* Wider saved jokes div */
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5); /* Updated transparency */
             color: #00ff00;
             padding: 10px;
             border: 2px solid #00ff00;
@@ -77,7 +77,7 @@
         }
 
         #savedJokes li {
-            font-size: 1rem;
+            font-size: 1rem; /* Reduced font size */
             margin-bottom: 10px;
             border-bottom: 2px solid #00ff00; /* Added visual divider */
             padding-bottom: 5px;
@@ -95,11 +95,11 @@
     <div class="container">
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
-        <button id "saveJokeButton" class="save-button">Save Joke</button>
+        <button id="saveJokeButton" class="save-button">Save Joke</button>
         <div id="jokeText"></div>
         <div id="savedJokes">
             <h2>Saved Jokes</h2>
-            <ul>
+            <ul id="savedJokesList">
                 <!-- Saved jokes will be added here dynamically -->
             </ul>
         </div>
@@ -115,7 +115,23 @@
         const saveJokeButton = document.getElementById("saveJokeButton");
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
-        const savedJokesList = document.querySelector("#savedJokes ul");
+        const savedJokesList = document.getElementById("savedJokesList"); // Updated
+
+        // Function to display saved jokes on page load
+        function displaySavedJokes() {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith("savedJoke-")) {
+                    const savedJoke = localStorage.getItem(key);
+                    const listItem = document.createElement("li");
+                    listItem.textContent = savedJoke;
+                    savedJokesList.appendChild(listItem);
+                }
+            }
+        }
+
+        // Display saved jokes on page load
+        displaySavedJokes();
 
         getJokeButton.addEventListener("click", () => {
             funnySound.play();
