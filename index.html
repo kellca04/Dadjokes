@@ -101,7 +101,7 @@
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
         <button id="saveJokeButton" class="save-button">Save Joke</button>
-        <div id="jokeText"></div>
+        <div id="jokeText" placeholder="Joke time YIPPIIEEE">Joke time YIPPIIEEE</div>
         <div id="savedJokes">
             <h2>Saved Jokes</h2>
             <ul id="savedJokesList">
@@ -176,9 +176,6 @@
                 listItem.addEventListener("click", removeSavedJoke);
                 savedJokesList.appendChild(listItem);
                 localStorage.setItem(key, currentJoke);
-                alert("Joke saved to local storage!");
-            } else {
-                alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
             }
         });
     </script>
