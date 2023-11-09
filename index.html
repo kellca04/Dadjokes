@@ -68,6 +68,14 @@
             position: fixed;
             top: 20px; /* Adjust the top position */
             right: 20px; /* Adjust the right position */
+            width: auto; /* Set the width to auto */
+        }
+
+        #savedJokesDropdown option {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 20px;
         }
 
         h1 {
@@ -113,7 +121,7 @@
                 const joke = data.joke;
                 jokeText.textContent = joke;
             })
-            .catch(error => {
+            .catch error => {
                 jokeText.textContent = "An error occurred while fetching the joke.";
                 console.error(error);
             });
