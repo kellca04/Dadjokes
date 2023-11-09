@@ -63,8 +63,8 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 300px;
-            background-color: rgba(0, 0, 0, 0.5); /* Updated transparency */
+            width: 400px; /* Wider saved jokes div */
+            background-color: rgba(0, 0, 0, 0.5);
             color: #00ff00;
             padding: 10px;
             border: 2px solid #00ff00;
@@ -77,8 +77,10 @@
         }
 
         #savedJokes li {
-            font-size: 1rem; /* Reduced font size */
+            font-size: 1rem;
             margin-bottom: 10px;
+            border-bottom: 2px solid #00ff00; /* Added visual divider */
+            padding-bottom: 5px;
         }
 
         h1 {
@@ -93,7 +95,7 @@
     <div class="container">
         <h1 class="fixed-top">BadJoke.gov</h1>
         <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
-        <button id="saveJokeButton" class="save-button">Save Joke</button>
+        <button id "saveJokeButton" class="save-button">Save Joke</button>
         <div id="jokeText"></div>
         <div id="savedJokes">
             <h2>Saved Jokes</h2>
