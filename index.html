@@ -81,6 +81,7 @@
             margin-bottom: 10px;
             border-bottom: 2px solid #00ff00; /* Added visual divider */
             padding-bottom: 5px;
+            cursor: pointer; /* Added cursor pointer */
         }
 
         h1 {
@@ -125,9 +126,18 @@
                     const savedJoke = localStorage.getItem(key);
                     const listItem = document.createElement("li");
                     listItem.textContent = savedJoke;
+                    listItem.setAttribute("data-key", key); // Store the key as data attribute
+                    listItem.addEventListener("click", removeSavedJoke); // Add click event to remove
                     savedJokesList.appendChild(listItem);
                 }
             }
+        }
+
+        // Function to remove a saved joke
+        function removeSavedJoke() {
+            const key = this.getAttribute("data-key");
+            localStorage.removeItem(key);
+            savedJokesList.removeChild(this);
         }
 
         // Display saved jokes on page load
@@ -154,16 +164,18 @@
         saveJokeButton.addEventListener("click", () => {
             const currentJoke = jokeText.textContent;
             if (currentJoke) {
+                const key = "savedJoke-" + new Date().getTime();
                 const listItem = document.createElement("li");
                 listItem.textContent = currentJoke;
+                listItem.setAttribute("data-key", key);
+                listItem.addEventListener("click", removeSavedJoke);
                 savedJokesList.appendChild(listItem);
-                localStorage.setItem("savedJoke-" + new Date().getTime(), currentJoke);
+                localStorage.setItem(key, currentJoke);
                 alert("Joke saved to local storage!");
             } else {
                 alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
             }
         });
-
     </script>
 </body>
 </html>
