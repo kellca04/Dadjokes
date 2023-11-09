@@ -147,9 +147,36 @@
             funnySound.play();
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "User-Agent": "BadJokeGov/1.0" // Set a user-agent header
                 }
             })
             .then(response => response.json())
             .then(data => {
-                const joke = data.j
+                const joke = data.joke;
+                jokeText.textContent = joke;
+            })
+            .catch(error => {
+                jokeText.textContent = "An error occurred while fetching the joke.";
+                console.error(error);
+            });
+        });
+
+        saveJokeButton.addEventListener("click", () => {
+            const currentJoke = jokeText.textContent;
+            if (currentJoke) {
+                const key = "savedJoke-" + new Date().getTime();
+                const listItem = document.createElement("li");
+                listItem.textContent = currentJoke;
+                listItem.setAttribute("data-key", key);
+                listItem.addEventListener("click", removeSavedJoke);
+                savedJokesList.appendChild(listItem);
+                localStorage.setItem(key, currentJoke);
+                alert("Joke saved to local storage!");
+            } else {
+                alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
+            }
+        });
+    </script>
+</body>
+</html>
