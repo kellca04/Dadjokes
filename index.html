@@ -33,6 +33,8 @@
             font-size: 2rem;
             transition: all 0.3s;
             outline: none;
+            border-radius: 10px; /* Rounded edges */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Drop shadow */
         }
 
         .btn-primary:hover {
@@ -48,6 +50,8 @@
             padding: 10px 20px;
             font-size: 1.5rem;
             cursor: pointer;
+            border-radius: 10px; /* Rounded edges */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Drop shadow */
         }
 
         #jokeText {
@@ -64,7 +68,7 @@
             top: 20px;
             right: 20px;
             width: 800px; /* 50% wider */
-            background-color: rgba(0, 0, 0, 0.5); /* Updated transparency */
+            background-color: rgba(0, 0, 0, 0.5);
             color: #00ff00;
             padding: 10px;
             border: 2px solid #00ff00;
@@ -77,11 +81,11 @@
         }
 
         #savedJokes li {
-            font-size: 1rem; /* Adjusted font size */
+            font-size: 1rem;
             margin-bottom: 10px;
-            border-bottom: 2px solid #00ff00; /* Added visual divider */
+            border-bottom: 2px solid #00ff00;
             padding-bottom: 5px;
-            cursor: pointer; /* Added cursor pointer */
+            cursor: pointer;
         }
 
         h1 {
@@ -116,7 +120,7 @@
         const saveJokeButton = document.getElementById("saveJokeButton");
         const jokeText = document.getElementById("jokeText");
         const funnySound = document.getElementById("funnySound");
-        const savedJokesList = document.getElementById("savedJokesList"); // Updated
+        const savedJokesList = document.getElementById("savedJokesList");
 
         // Function to display saved jokes on page load
         function displaySavedJokes() {
@@ -126,8 +130,8 @@
                     const savedJoke = localStorage.getItem(key);
                     const listItem = document.createElement("li");
                     listItem.textContent = savedJoke;
-                    listItem.setAttribute("data-key", key); // Store the key as data attribute
-                    listItem.addEventListener("click", removeSavedJoke); // Add click event to remove
+                    listItem.setAttribute("data-key", key);
+                    listItem.addEventListener("click", removeSavedJoke);
                     savedJokesList.appendChild(listItem);
                 }
             }
@@ -148,7 +152,7 @@
             fetch("https://icanhazdadjoke.com/", {
                 headers: {
                     "Accept": "application/json",
-                    "User-Agent": "BadJokeGov/1.0" // Set a user-agent header
+                    "User-Agent": "BadJokeGov/1.0"
                 }
             })
             .then(response => response.json())
