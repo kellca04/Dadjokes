@@ -77,7 +77,7 @@
         }
 
         #savedJokes li {
-            font-size: 1.2rem; /* Adjusted font size */
+            font-size: 1rem; /* Adjusted font size */
             margin-bottom: 10px;
             border-bottom: 2px solid #00ff00; /* Added visual divider */
             padding-bottom: 5px;
@@ -152,30 +152,4 @@
             })
             .then(response => response.json())
             .then(data => {
-                const joke = data.joke;
-                jokeText.textContent = joke;
-            })
-            .catch(error => {
-                jokeText.textContent = "An error occurred while fetching the joke.";
-                console.error(error);
-            });
-        });
-
-        saveJokeButton.addEventListener("click", () => {
-            const currentJoke = jokeText.textContent;
-            if (currentJoke) {
-                const key = "savedJoke-" + new Date().getTime();
-                const listItem = document.createElement("li");
-                listItem.textContent = currentJoke;
-                listItem.setAttribute("data-key", key);
-                listItem.addEventListener("click", removeSavedJoke);
-                savedJokesList.appendChild(listItem);
-                localStorage.setItem(key, currentJoke);
-                alert("Joke saved to local storage!");
-            } else {
-                alert("There is no joke to save. Click 'Get a Joke' to fetch a joke first.");
-            }
-        });
-    </script>
-</body>
-</html>
+                const joke = data.j
