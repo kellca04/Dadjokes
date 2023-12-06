@@ -111,3 +111,102 @@
             letter-spacing: 8px;
             margin-bottom: 20px;
         }
+        #liveChatContainer {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 20%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: url('https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+            background-size: cover; /* Ensure the background covers the entire container */
+            color: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent content overflow */
+        }
+        
+        #messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for messages */
+            color: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        #sendMsg {
+            display: flex;
+            flex-shrink: 0;
+            align-items: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+            background: #AAA;
+            max-width: 100%; /* Ensure the container doesn't exceed the screen width */
+        }
+        
+        #msgTxt {
+            flex-grow: 1;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: none;
+            background: #fff;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        #msgBtn {
+            flex-grow: 0;
+            width: 20%;
+            max-width: 100px;
+            height: 100%;
+            background: #7b241c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        #msgBtn:hover {
+            background-color: #641e16;
+        }
+        
+        .outer {
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+        }
+        
+        #inner {
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+        
+        .me {
+            background: #7b241c;
+            color: #fff;
+            align-self: flex-end;
+        }
+        
+        .notMe {
+            background: #fff;
+            color: #000;
+            align-self: flex-start;
+        }
+        
+        #dltMsg {
+            background: transparent;
+            border: none;
+            margin-left: 10px;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        #dltMsg:hover {
+            color: #eee;
+        }
+        
