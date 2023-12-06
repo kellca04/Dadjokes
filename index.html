@@ -26,12 +26,205 @@
         <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
     </div>
 
+    <div class="live-chat-placeholder" id="liveChatContainer">
+        <div id="messages"></div>
+        <div id="sendMsg">
+          <input type="text" id="msgTxt" placeholder="Type your message here...">
+          <button id="msgBtn" onclick="module.sendMsg()">Send</button>
+        </div>
+      </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <script>
+        module = {};
+      </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, remove, onChildAdded, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     
+    
+
+    const firebaseConfig = {
+
+         apiKey: "AIzaSyBI3SiUmWJSMH4ZUmp8pM_KmMlzjmJjtU8",
+
+         authDomain: "dadjokegov.firebaseapp.com",
+
+         projectId: "dadjokegov",
+
+        storageBucket: "dadjokegov.appspot.com",
+
+        messagingSenderId: "596734573699",
+
+        appId: "1:596734573699:web:81f75ea6447b5b108d6fb6"
+
+        };
+
+      
+        const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+    
+            // variables
+            var msgTxt = document.getElementById('msgTxt');
+            var sender;
+            if(sessionStorage.getItem('sender')){
+                sender = sessionStorage.getItem('sender');
+            } else {
+                sender = prompt('PLEASE ENTER YOUR NAME');
+                sessionStorage.setItem('sender',sender);
+            }
+    
+            // TO SEND MESSAGES
+            module.sendMsg = function sendMsg(){
+                var msg = msgTxt.value;
+                var timestamp = new Date().getTime();
+                set(ref(db,"messages/"+timestamp),{
+                    msg : msg,
+                    sender : sender
+                })
+    
+                msgTxt.value="";
+            }
+    
+            // TO RECEIVE MSG
+            onChildAdded(ref(db,"messages"), (data)=>{
+                if(data.val().sender == sender){
+                    messages.innerHTML += "<div style=justify-content:end class=outer id="+data.key+"><div id=inner class=me>you : "+data.val().msg+"<button id=dltMsg onclick=module.dltMsg("+data.key+")>X</button></div></div>";
+                } else {
+                    messages.innerHTML += "<div class=outer id="+data.key+"><div id=inner class=notMe>"+data.val().sender+" : "+data.val().msg+"</div></div>";
+                }
+            })
+    
+            // TO DELETE MSG
+            module.dltMsg = function dltMsg(key){
+                remove(ref(db,"messages/"+key));
+            }
+    
+            // WHEN MSG IS DELETED
+            onChildRemoved(ref(db,"messages"),(data)=>{
+                var msgBox = document.getElementById(data.key);
+                messages.removeChild(msgBox);
+            })
+        </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BadJoke.gov</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</head>
+<body class="text-center">
+    <div class="container">
+        <h1 class="fixed-top">BadJoke.gov</h1>
+        <div id="jokeText">Joke time YIPPIIEEE</div>
+        <div id="buttons">
+            <button id="getJokeButton" class="btn btn-primary">Get a Joke</button>
+            <button id="saveJokeButton" class="save-button">Save Joke</button>
+        </div>
+        <div id="volumeControl">
+            <label for="volumeSlider" style="color: #00ff00;">Volume:</label>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div id="savedJokes">
+            <h2>Saved Jokes</h2>
+            <ul id="savedJokesList">
+                <!-- Saved jokes will be added here dynamically -->
+            </ul>
+        </div>
+        <audio id="funnySound" src="fart.mp3" preload="auto"></audio>
+    </div>
+
+    <div class="live-chat-placeholder" id="liveChatContainer">
+        <div id="messages"></div>
+        <div id="sendMsg">
+          <input type="text" id="msgTxt" placeholder="Type your message here...">
+          <button id="msgBtn" onclick="module.sendMsg()">Send</button>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script>
+        module = {};
+      </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, remove, onChildAdded, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    
+    
+
+    const firebaseConfig = {
+
+         apiKey: "AIzaSyBI3SiUmWJSMH4ZUmp8pM_KmMlzjmJjtU8",
+
+         authDomain: "dadjokegov.firebaseapp.com",
+
+         projectId: "dadjokegov",
+
+        storageBucket: "dadjokegov.appspot.com",
+
+        messagingSenderId: "596734573699",
+
+        appId: "1:596734573699:web:81f75ea6447b5b108d6fb6"
+
+        };
+
+      
+        const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+    
+            // variables
+            var msgTxt = document.getElementById('msgTxt');
+            var sender;
+            if(sessionStorage.getItem('sender')){
+                sender = sessionStorage.getItem('sender');
+            } else {
+                sender = prompt('PLEASE ENTER YOUR NAME');
+                sessionStorage.setItem('sender',sender);
+            }
+    
+            // TO SEND MESSAGES
+            module.sendMsg = function sendMsg(){
+                var msg = msgTxt.value;
+                var timestamp = new Date().getTime();
+                set(ref(db,"messages/"+timestamp),{
+                    msg : msg,
+                    sender : sender
+                })
+    
+                msgTxt.value="";
+            }
+    
+            // TO RECEIVE MSG
+            onChildAdded(ref(db,"messages"), (data)=>{
+                if(data.val().sender == sender){
+                    messages.innerHTML += "<div style=justify-content:end class=outer id="+data.key+"><div id=inner class=me>you : "+data.val().msg+"<button id=dltMsg onclick=module.dltMsg("+data.key+")>X</button></div></div>";
+                } else {
+                    messages.innerHTML += "<div class=outer id="+data.key+"><div id=inner class=notMe>"+data.val().sender+" : "+data.val().msg+"</div></div>";
+                }
+            })
+    
+            // TO DELETE MSG
+            module.dltMsg = function dltMsg(key){
+                remove(ref(db,"messages/"+key));
+            }
+    
+            // WHEN MSG IS DELETED
+            onChildRemoved(ref(db,"messages"),(data)=>{
+                var msgBox = document.getElementById(data.key);
+                messages.removeChild(msgBox);
+            })
+        </script>
 </body>
 </html>
